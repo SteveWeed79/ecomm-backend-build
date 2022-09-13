@@ -10,7 +10,7 @@ class Product extends Model {}
 Product.init(
   {
     id:{
-      type: DataTypes.INTERGER,
+      type: DataTypes.INTEGER,
       allowNull: false,
       primaryKey: true,
       autoIncrement: true,
@@ -27,15 +27,15 @@ Product.init(
       },
     },
     stock: {
-      type: DataType.INTERGER,
+      type: DataType.INTEGER,
       allowNull: false,
       defaultValue: 10,
       validate: {
         isNumeric: true,
       },
     },
-    catergory_id: {
-      type: DataTypes.INTERGER,
+    category_id: {
+      type: DataTypes.INTEGER,
       references: {
         model: 'catergory',
         key: 'id',
