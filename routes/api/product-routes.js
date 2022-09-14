@@ -4,11 +4,22 @@ const { Product, Category, Tag, ProductTag } = require('../../models');
 // The `/api/products` endpoint
 
 // get all products
-router.get('/', (req, res) => {
+router.get('/', async (req, res) => {
+  try {
+    const allProducts = Product.findAll({
+      attributes: {
+        include: [{ model: Product.id, model: Tag.id }],
+      },
+
+    });
+    res.status(200).json(allProducts);
+  } catch (err) {
+    res.status(500).json(err);
+  }
   // find all products
-  // be sure to include its associated Category and Tag data
-  
+  // be sure to include its associated Category and Tag dat}
 });
+
 
 // get one product
 router.get('/:id', (req, res) => {
