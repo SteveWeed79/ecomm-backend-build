@@ -1,34 +1,39 @@
-const router = require('express').Router();
-const { Product, Category, Tag, ProductTag } = require('../../models');
+const router = require("express").Router();
+const { Product, Category, Tag, ProductTag } = require("../../models");
 
 // The `/api/products` endpoint
 
 // get all products
-router.get('/', async (req, res) => {
+router.get("/", async (req, res) => {
   try {
-    const allProducts = Product.findAll({
-      attributes: {
-        include: [{ model: Product.id, model: Tag.id }],
-      },
-
+    const allProducts = await Product.findAll({
+      include: [{ model: Category }, { model: Tag, through: ProductTag }],
     });
     res.status(200).json(allProducts);
   } catch (err) {
-    res.status(500).json(err);
+    res.status(500).json(err.message);
   }
   // find all products
   // be sure to include its associated Category and Tag dat}
 });
 
-
 // get one product
-router.get('/:id', (req, res) => {
+router.get("/:id", async (req, res) => {
+  try {
+    const single = await Product.findByPk(req.params.id, {
+      include: [{ model: Category }, { model: Tag, through: ProductTag }],
+    });
+    res.json(single);
+  } catch (err) {
+    res.status(500).json(err.message);
+  }
+
   // find a single product by its `id`
   // be sure to include its associated Category and Tag data
 });
 
 // create new product
-router.post('/', (req, res) => {
+router.post("/", (req, res) => {
   /* req.body should look like this...
     {
       product_name: "Basketball",
@@ -60,7 +65,7 @@ router.post('/', (req, res) => {
 });
 
 // update product
-router.put('/:id', (req, res) => {
+router.put("/:id", (req, res) => {
   // update product data
   Product.update(req.body, {
     where: {
@@ -101,7 +106,13 @@ router.put('/:id', (req, res) => {
     });
 });
 
-router.delete('/:id', (req, res) => {
+router.delete("/:id", async (req, res) => {
+  try {
+    const remove = await Product.destroy({ where: { id: req.params.id } });
+    res.json(remove);
+  } catch (error) {
+    res.status(400).json(error);
+  }
   // delete one product by its `id` value
 });
 
