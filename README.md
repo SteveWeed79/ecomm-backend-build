@@ -8,7 +8,6 @@ This program is a backend build for a eCommerece website. I stretched my knowled
 
 - [Installation](#installation)
 - [Usage](#usage)
-- [Credits](#credits)
 - [License](#license)
 
 ## Installation
