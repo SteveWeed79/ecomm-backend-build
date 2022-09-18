@@ -20,7 +20,7 @@ You will need to run "npm i" to install the needed packages. Also, insomina is u
 This project runs in the back end of a eCommerce website and allows the user to update, delete, create products, cateogories and tags as needed.
 
 Link to the demo video
-https://drive.google.com/file/d/1gem2t80vkpZo_27GOJWl_rh3BtsaWkIF/view
+https://drive.google.com/file/d/1GbSzTIQxB7rFNdLp7yn6xXju_qumvlv9/view
 
 ## License
 
